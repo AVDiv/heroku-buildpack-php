@@ -5,5 +5,5 @@ cat <<EOF
 ---
 addons: []
 default_process_types:
-  web: heroku-php-apache2
+  web: heroku-php-nginx
 EOF
