@@ -26,6 +26,10 @@ http {
 		server unix:/tmp/heroku.fcgi.<?=getenv('PORT')?:'8080'?>.sock max_fails=3 fail_timeout=3s;
 		keepalive 16;
 	}
+	
+	upstream app_server {
+    		server 127.0.0.1:9000 fail_timeout=0;
+	}
 
 	server {
 		# define an easy to reference name that can be used in try_files
