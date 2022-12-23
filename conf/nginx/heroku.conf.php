@@ -47,6 +47,18 @@ http {
 
 			fastcgi_pass heroku-fcgi;
 		}
+		
+		location / {
+			# Uncomment this if statement to force SSL/redirect http -> https
+			if ($http_x_forwarded_proto != "https") {
+			  return 301 https://$host$request_uri;
+			}
+
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header Host $http_host;
+			proxy_redirect off;
+			proxy_pass http://app_server;
+		}
 
 		server_name localhost;
 		listen <?=getenv('PORT')?:'8080'?>;
