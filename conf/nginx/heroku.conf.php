@@ -28,7 +28,7 @@ http {
 	}
 	
 	upstream app_server {
-    		server 127.0.0.1:9000 fail_timeout=0;
+    		server 127.0.0.1:443 fail_timeout=0;
 	}
 
 	server {
