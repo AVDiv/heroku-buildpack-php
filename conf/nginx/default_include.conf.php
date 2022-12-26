@@ -1,6 +1,7 @@
 location / {
 	index  index.php index.html index.htm;
 	# Uncomment this if statement to force SSL/redirect http -> https
+	try_files $uri $uri.html $uri/ @extensionless-php;
 	if ($http_x_forwarded_proto != "https") {
 	  return 301 https://$host$request_uri;
 	}
@@ -9,4 +10,12 @@ location / {
 # for people with app root as doc root, restrict access to a few things
 location ~ ^/(composer\.(json|lock|phar)$|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
 	deny all;
+}
+
+# .php extensionless files
+location @extensionless-php {
+    if ( -f $document_root$uri.php ) {
+        rewrite ^ $uri.php last;
+    }
+    return 404;
 }
