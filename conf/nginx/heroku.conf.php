@@ -68,7 +68,9 @@ http {
 		location ~ /\. {
 			deny all;
 		}
-
+		
+		# Custom 404 page
+		error_page 404 /error/404.php;
 		# default handling of .php
 		location ~ \.php {
 			try_files @heroku-fcgi @heroku-fcgi;
