@@ -9,7 +9,8 @@ location / {
 
 # for people with app root as doc root, restrict access to a few things
 location ~ ^/(composer\.(json|lock|phar)$|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
-	deny all;
+	# deny all;
+	return 404;
 }
 
 # .php extensionless files
