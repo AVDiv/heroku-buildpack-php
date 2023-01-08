@@ -8,7 +8,7 @@ location / {
 }
 
 # for people with app root as doc root, restrict access to a few things
-location ~ ^/(composer\.(json|lock|phar)$|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/) {
+location ~ ^/(composer\.(json|lock|phar)$|Procfile$|<?=getenv('COMPOSER_VENDOR_DIR')?>/|<?=getenv('COMPOSER_BIN_DIR')?>/|/backend/|/components/|\.gitignore/$|cookie_structure\.txt$) {
 	# deny all;
 	return 404;
 }
